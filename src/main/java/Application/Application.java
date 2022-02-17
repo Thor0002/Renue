@@ -10,8 +10,13 @@ public class Application {
 	
 	private static int coloumn;
 	
+	private static String fileName;
+	
 	@Value("${airports.coloumn}")
 	public void setName(int value) {this.coloumn = value;}
+	
+	@Value("${airports.file}")
+	public void setFileName(String value) {this.fileName = value;}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -20,7 +25,7 @@ public class Application {
 		System.out.println("Введите строку:");
 		String key = sc.next();
 		
-		ReaderCSV rd = new ReaderCSV("airports.csv", coloumn);
+		ReaderCSV rd = new ReaderCSV(fileName, coloumn);
 		long timeElapsed = rd.read(key);
 		System.out.println("Время, затраченное на поиск и сортировку: " + (timeElapsed / 1000000) + " мс");
 	}
